@@ -1,0 +1,53 @@
+.venue-map-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.venue-map {
+  position: relative;
+  width: 1158px;
+  height: 1900px;
+  background-color: var(--surface);
+}
+
+.table-button {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  color: #0e0e10;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.table-button.available {
+  background-color: var(--available);
+}
+
+.table-button.reserved {
+  background-color: var(--reserved);
+  color: #fff;
+}
+
+.table-button.selected {
+  background-color: var(--selected);
+}
+
+.table-button.highlighted {
+  background-color: var(--highlighted);
+  color: #fff;
+}
+
+.table-button.faded {
+  opacity: 0.2;
+}
+
+@media (max-width: 640px) {
+  .venue-map { height: 1900px; }
+  .table-button { width: 36px; height: 36px; font-size: 11px; }
+}

@@ -1,0 +1,67 @@
+.price-manager {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.price-manager h2 {
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.price-lookup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.price-lookup select {
+  width: auto;
+  margin-bottom: 0;
+  min-width: 90px;
+}
+
+.price-lookup-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.price-empty {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.price-form {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0;
+}
+
+.price-form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.price-form-row > div {
+  flex: 1;
+}
+
+.price-form input {
+  margin-bottom: 0;
+}
+
+.price-form label {
+  margin-bottom: 4px;
+}
+
+.price-form .btn-primary {
+  margin-top: 12px;
+  width: 100%;
+}
