@@ -23,6 +23,7 @@
   font-weight: 600;
   font-size: 12px;
   cursor: pointer;
+  z-index: 1;
 }
 
 .table-button.available {

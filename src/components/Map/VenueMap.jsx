@@ -2,6 +2,15 @@ import { useEffect, useState } from 'react';
 import { getTables } from '../../services/api';
 import './VenueMap.css';
 
+const GRID_ORIGIN_X = 100;
+const GRID_ORIGIN_Y = 100;
+const GRID_SPACING_X = 130;
+const GRID_SPACING_Y = 110;
+
+function snapToGrid(value, origin, spacing) {
+  return origin + Math.round((value - origin) / spacing) * spacing;
+}
+
 function VenueMap({ selectedTableIds, onToggleSelect, onReservedClick, highlightedTableIds, placementMode, onPlaceTable }) {
   const [tables, setTables] = useState([]);
   const [error, setError] = useState(null);
@@ -22,15 +31,6 @@ function VenueMap({ selectedTableIds, onToggleSelect, onReservedClick, highlight
     }
   };
 
-  const GRID_ORIGIN_X = 100;
-  const GRID_ORIGIN_Y = 100;
-  const GRID_SPACING_X = 130;
-const GRID_SPACING_Y = 90;
-
-  function snapToGrid(value, origin, spacing) {
-    return origin + Math.round((value - origin) / spacing) * spacing;
-  }
-
   const handleMapClick = (e) => {
     if (!placementMode) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -43,9 +43,24 @@ const GRID_SPACING_Y = 90;
     onPlaceTable(x, y);
   };
 
+  // Draw grid lines that pass exactly through each table's center point
+  // (table buttons are 42px, so the center is 21px past its left/top).
+  const CELL_SIZE = 42;
+  const gridBackgroundStyle = {
+    backgroundImage: `
+      repeating-linear-gradient(to right, var(--border) 0, var(--border) 1px, transparent 1px, transparent ${GRID_SPACING_X}px),
+      repeating-linear-gradient(to bottom, var(--border) 0, var(--border) 1px, transparent 1px, transparent ${GRID_SPACING_Y}px)
+    `,
+    backgroundPosition: `${GRID_ORIGIN_X + CELL_SIZE / 2}px 0, 0 ${GRID_ORIGIN_Y + CELL_SIZE / 2}px`,
+  };
+
   return (
     <div className="venue-map-wrapper">
-      <div className="venue-map" onClick={handleMapClick} style={{ cursor: placementMode ? 'crosshair' : 'default' }}>
+      <div
+        className="venue-map"
+        onClick={handleMapClick}
+        style={{ cursor: placementMode ? 'crosshair' : 'default', ...gridBackgroundStyle }}
+      >
         {tables.map((table) => {
           const isSelected = selectedTableIds.includes(table.id);
           let statusClass = 'available';
